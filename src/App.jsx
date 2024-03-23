@@ -1,7 +1,18 @@
+import Header from "./components/Header";
+import Shop from "./components/Shop";
+import DUMMYDATA from "../dummy-products";
+
 const App = () => {
   return (
     <>
-      <h2 className="bg-stone-700 font-bold text-8xl">HEllo</h2>
+      <div>
+        <section>
+          <Header />
+        </section>
+        <section>
+          <Shop data={DUMMYDATA} />
+        </section>
+      </div>
     </>
   );
 };
