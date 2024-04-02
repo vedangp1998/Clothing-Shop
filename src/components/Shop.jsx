@@ -1,28 +1,22 @@
-import Items from "./Items";
+import Product from "./Product";
+import DUMMY_PRODUCTS from "../../dummy-products";
 
-const Shop = ({ data }) => {
+const Shop = ({ onAddItemToCart }) => {
   return (
     <>
-      <section>
-        <div>
-          <p className="font-serif ... text-custom-500">
-            ELEGENT CLOTHING FOR EVERYONE
-          </p>
-        </div>
-
-        {data.map((dummyData) => {
-          return (
-            <li>
-              <Items
-                key={dummyData.id}
-                image={dummyData.image}
-                title={dummyData.title}
-                description={dummyData.description}
-                price={dummyData.price}
-              />
-            </li>
-          );
-        })}
+      <section className="">
+        <p className="font-serif ... text-custom-500">
+          ELEGENT CLOTHING FOR EVERYONE
+        </p>
+        <ul className="flex flex-wrap gap-8 justify-center items-center">
+          {DUMMY_PRODUCTS.map((product) => {
+            return (
+              <li key={product.id}>
+                <Product {...product} onAddToCart={onAddItemToCart} />
+              </li>
+            );
+          })}
+        </ul>
       </section>
     </>
   );
