@@ -1,4 +1,8 @@
-const Product = ({ id, image, title, description, price, onAddToCart }) => {
+import Cartcontext from "../store/shoping-cart-context";
+import { useContext } from "react";
+
+const Product = ({ id, image, title, description, price }) => {
+  const { addItemToCart } = useContext(Cartcontext);
   return (
     <>
       <article className="max-w-96">
@@ -12,7 +16,7 @@ const Product = ({ id, image, title, description, price, onAddToCart }) => {
           <p className="flex justify-end items-end mt-8">
             <button
               onClick={() => {
-                onAddToCart(id);
+                addItemToCart(id);
               }}
               className="bg-custom-300 p-2 rounded-lg "
             >

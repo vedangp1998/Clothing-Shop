@@ -2,6 +2,8 @@ import Header from "./components/Header";
 import Shop from "./components/Shop";
 import { useState } from "react";
 import DUMMY_PRODUCTS from "../dummy-products";
+import Product from "./components/Product";
+import Cartcontext from "./store/shoping-cart-context";
 
 const App = () => {
   const [shoppingCart, setShoppingCart] = useState({
@@ -65,19 +67,26 @@ const App = () => {
     });
   }
 
+  const cxtValue = {
+    items: shoppingCart.items,
+    addItemToCart: handleAddItemToCart,
+    updateItemQuantity: handleUpdateCartItemQuantity,
+  };
+
   return (
     <>
-      <div>
-        <section>
-          <Header
-            cart={shoppingCart}
-            onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
-          />
-        </section>
-        <section>
-          <Shop onAddItemToCart={handleAddItemToCart} />
-        </section>
-      </div>
+      <Cartcontext.Provider value={cxtValue}>
+        <Header />
+        <Shop>
+          {DUMMY_PRODUCTS.map((product) => {
+            return (
+              <li key={product.id}>
+                <Product {...product} />
+              </li>
+            );
+          })}
+        </Shop>
+      </Cartcontext.Provider>
     </>
   );
 };

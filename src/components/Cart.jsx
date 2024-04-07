@@ -1,23 +1,21 @@
-const Cart = ({ items, onUpdateItemQuantity }) => {
-  const totalPrice = items.reduce(
+import Cartcontext from "../store/shoping-cart-context";
+import { useContext } from "react";
+
+const Cart = () => {
+  const { items, updateItemQuantity } = useContext(Cartcontext);
+
+  const totalPrice = items?.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const formattedTotalPrice = `$${totalPrice.toFixed(2)}`;
+  const formattedTotalPrice = `$${totalPrice?.toFixed(2)}`;
 
-  const removeHandler = () => {
-    onUpdateItemQuantity(item.id, -1);
-  };
-
-  const addHandler = () => {
-    onUpdateItemQuantity(item.id, 1);
-  };
   return (
     <div>
-      {items.length === 0 && (
+      {items?.length === 0 && (
         <p className="font-serif ... mt-2 px-0.5">No Items in Cart!</p>
       )}
-      {items.length > 0 && (
+      {items?.length > 0 && (
         <ul className="bg-custom-100">
           {items.map((item) => {
             const formattedPrice = `$${item.price.toFixed(2)}`;
@@ -34,14 +32,14 @@ const Cart = ({ items, onUpdateItemQuantity }) => {
                 <div className="flex items-center">
                   <button
                     className="bg-transperent p-1 rounded-xl hover:bg-custom-300"
-                    onClick={() => onUpdateItemQuantity(item.id, -1)}
+                    onClick={() => updateItemQuantity(item.id, -1)}
                   >
                     -
                   </button>
                   <span>{item.quantity}</span>
                   <button
                     className="bg-transperent p-1 rounded-xl hover:bg-custom-300"
-                    onClick={() => onUpdateItemQuantity(item.id, 1)}
+                    onClick={() => updateItemQuantity(item.id, 1)}
                   >
                     +
                   </button>

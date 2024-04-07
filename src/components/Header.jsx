@@ -1,11 +1,14 @@
 import Logo from "/logo.png";
 import CartModal from "./CartModal";
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import Cartcontext from "../store/shoping-cart-context";
 
-const Header = ({ cart, onUpdateCartItemQuantity }) => {
+const Header = ({}) => {
+  const { items } = useContext(Cartcontext);
+
   const modal = useRef();
 
-  const cartQuantity = cart.items.length;
+  const cartQuantity = items.length;
 
   const handleOpenCartClick = () => {
     modal.current.open();
@@ -34,13 +37,7 @@ const Header = ({ cart, onUpdateCartItemQuantity }) => {
 
   return (
     <>
-      <CartModal
-        ref={modal}
-        cartItems={cart.items}
-        onUpdateCartItemQuantity={onUpdateCartItemQuantity}
-        title="YOUR CART"
-        action={modalActions}
-      />
+      <CartModal ref={modal} title="YOUR CART" action={modalActions} />
       <section className="flex justify-around m-4 items-center">
         <div className="flex items-center gap-4">
           <img className="h-20 w-20" src={Logo} alt="Logo" />
